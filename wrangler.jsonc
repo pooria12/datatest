@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "datamind-ai",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // Always run the Worker first for API routes so they never fall back to the SPA.
+    "run_worker_first": ["/api", "/api/*"]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    // Production value. For local development copy .dev.vars.example to .dev.vars.
+    "ENVIRONMENT": "production"
+  }
+}
